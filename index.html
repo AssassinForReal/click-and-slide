@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Click & Slide</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <div id="app-root"></div>
+
+  <template id="template-page-home">
+    <div class="container">
+      <button class="btn-control btn-high-scores-header">High Scores</button>
+      <h1 class="site-title">Click & Slide</h1>
+      <h2 class="section-title">Choose a category:</h2>
+      <div class="category-list"></div>
+    </div>
+  </template>
+
+  <template id="template-page-puzzles">
+    <div class="container">
+      <button class="btn-control btn-high-scores-header">High Scores</button>
+      <h1 class="site-title">Click & Slide</h1>
+      <h2 class="section-title"></h2>
+      <h3 class="section-subtitle">Choose a puzzle:</h3>
+      <button class="btn btn-back">
+        <img src="images/icons/arrow-back.svg" alt="&lt;-" width="12">
+        Back to category list
+      </button>
+      <div class="category-list"></div>
+    </div>
+  </template>
+
+  <template id="template-page-game">
+    <div class="container">
+      <button class="btn-control btn-high-scores-header">High Scores</button>
+      <h1 class="site-title">Click & Slide</h1>
+      <h2 class="section-title mt-0 clickable"></h2>
+    </div>
+    <div class="game-grid">
+      <div class="game-left">
+        <div class="game-column">
+          <button class="btn btn-back">
+            <img src="images/icons/arrow-back.svg" alt="" width="12">
+            Back to category list
+          </button>
+          <div class="puzzle-slider">
+            <div class="puzzle-slider-outer">
+              <div class="puzzle-slider-inner"></div>
+            </div>
+            <div class="puzzle-slider-controls">
+              <button class="btn-control btn-previous">
+                <img src="images/icons/arrow-left.svg" alt="Previous" width="24">
+              </button>
+              <button class="btn-control btn-next">
+                <img src="images/icons/arrow-right.svg" alt="Next" width="24">
+              </button>
+            </div>
+          </div>
+          <div class="mode-buttons"></div>
+          <div class="digital-timer"></div>
+        </div>
+      </div>
+      <div class="game-right">
+        <div class="game-column">
+          <canvas class="puzzle-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="template-category-card">
+    <figure class="category">
+      <header>
+        <img class="category-thumbnail">
+      </header>
+      <div class="category-body">
+        <figcaption class="category-title"></figcaption>
+        <small class="category-puzzle-count"></small>
+      </div>
+      <footer></footer>
+    </figure>
+  </template>
+
+  <template id="template-puzzle-card">
+    <figure class="category">
+      <header>
+        <img class="category-thumbnail">
+      </header>
+      <div class="category-body">
+        <figcaption class="category-title"></figcaption>
+      </div>
+      <footer></footer>
+    </figure>
+  </template>
+
+  <template id="template-puzzle-slide">
+    <figure class="puzzle-slide">
+      <header>
+        <img class="puzzle-slide-thumbnail">
+      </header>
+      <div class="category-body">
+        <figcaption class="category-title puzzle-slide-title"></figcaption>
+      </div>
+      <footer></footer>
+    </figure>
+  </template>
+
+  <template id="template-dialog">
+    <div class="shadow">
+      <div class="dialog">
+        <button class="btn-control btn-close">
+          <img src="images/icons/close.svg" alt="Close">
+        </button>
+        <div class="dialog-content"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="template-dialog-game-ended">
+    <div class="dialog-game-ended">
+      <div class="dialog-title">Game ended</div>
+      <div class="dialog-subtitle">Solved in <span class="dialog-solved-in"></span></div>
+
+      <div class="dialog-puzzle-preview-wrapper">
+        <img class="dialog-puzzle-preview">
+        <div class="dialog-puzzle-preview-label"></div>
+      </div>
+
+      <div class="dialog-puzzle-name"></div>
+      <div class="dialog-category-name"></div>
+      <button class="btn btn-mode btn-save">Save Your score</button>
+      <button class="btn btn-secondary btn-high-scores">High Scores</button>
+    </div>
+  </template>
+
+  <template id="template-dialog-high-scores">
+    <div class="dialog-high-scores">
+      <div class="dialog-title">High Scores</div>
+
+      <div class="dialog-puzzle-preview-wrapper">
+        <img class="dialog-puzzle-preview">
+        <div class="dialog-puzzle-preview-label"></div>
+      </div>
+
+      <div class="dialog-puzzle-name"></div>
+      <div class="dialog-category-name"></div>
+      <div class="dialog-high-score-list"></div>
+    </div>
+  </template>
+
+  <template id="template-dialog-score-chooser">
+    <div class="dialog-score-chooser">
+      <div class="dialog-title">High Scores</div>
+      <div class="dialog-score-chooser-score-list"></div>
+    </div>
+  </template>
+
+  <template id="template-dialog-recommended">
+    <div class="dialog-recommended">
+      <div class="dialog-title">Did You enjoy solving<br><span class="dialog-puzzle-title"></span>?</div>
+      <div class="dialog-subtitle">Try different puzzles from this category:</div>
+      <div class="dialog-puzzle-list"></div>
+      <button class="btn btn-secondary btn-discard">Thanks, not this time</button>
+    </div>
+  </template>
+
+  <template id="template-dialog-error">
+    <div class="dialog-error">
+      <div class="dialog-title"></div>
+      <div class="dialog-message"></div>
+    </div>
+  </template>
+
+  <div id="app-errors"></div>
+
+  <script type="module" src="js/main.js" id="app-script"></script>
+
+  <script nomodule>
+    (function () {
+      document.getElementById('app-errors').innerHTML =
+        'Sorry, your browser is not supported by this application!<br>Please update your browser!';
+    })();
+  </script>
+
+  <script>
+    (function () {
+      document.getElementById('app-script').onerror = function () {
+        document.getElementById('app-errors').innerHTML = 'Sorry, this application requires a web server to run!';
+      }
+    })();
+  </script>
+</body>
+
+</html>
